@@ -1,0 +1,12 @@
+from sqlalchemy.orm import Session
+
+from ..models import Notification
+
+
+def create_notification(db: Session, user_id: int, message: str) -> Notification:
+    notif = Notification(user_id=user_id, message=message)
+    db.add(notif)
+    db.commit()
+    db.refresh(notif)
+    return notif
+
